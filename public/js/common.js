@@ -37,6 +37,7 @@ $('#submitReplyButton , #submitPostButton').click((event) => {
     }
     //making post request using jquery
     $.post("/api/posts", data, postData => {
+           console.log(postData)
 
         if (postData.replyTo) {
             emitNotification(postData.replyTo.postedBy)
@@ -449,7 +450,7 @@ function htmlPost(postData, largeFont = false) {
         if (!postData.replyTo._id) {
             return alert('replyTo is not populated')
         }
-        if (!postData.replyTo.postedBy._id) {
+        if (!postData.replyTo._id && !postData.replyTo.postedBy._id) {
             return alert('postedBy is not populated')
         }
         const replyToUsername = postData.replyTo.postedBy.userName
