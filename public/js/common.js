@@ -37,8 +37,7 @@ $('#submitReplyButton , #submitPostButton').click((event) => {
     }
     //making post request using jquery
     $.post("/api/posts", data, postData => {
-           console.log(postData)
-
+          
         if (postData.replyTo) {
             emitNotification(postData.replyTo.postedBy)
             location.reload()
