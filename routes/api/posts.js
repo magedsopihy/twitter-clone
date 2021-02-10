@@ -87,9 +87,10 @@ route.post('/', async (req, res) => {
         newPost = await User.populate(newPost, { path: 'postedBy' })
         newPost = await Post.populate(newPost, { path: 'replyTo' })
         if(newPost.replyTo !== undefined){
+           
             await Notification.insertNotifications(newPost.replyTo.postedBy, req.session.user._id, "reply", newPost._id)
         }
-        
+    
 
         res.status(201).send(newPost)
     } catch (e) {

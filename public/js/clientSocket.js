@@ -19,15 +19,16 @@ socket.on("notification received", () => {
     $.get('/api/notification/latest', (notificationData) => {
         showNotificationPopUp(notificationData)
         updateNotificationBadge()
-        
+
     })
 
 })
 
 function emitNotification(userId) {
-    if (userId == userLoggedIn) {
-        return
+   
+    if (userId !== userLoggedIn._id) {
+        socket.emit("notification received", userId)
     }
+    return
 
-    socket.emit("notification received", userId)
 }

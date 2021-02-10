@@ -22,8 +22,8 @@ notificationSchema.statics.insertNotifications = async (userTo, userFrom, notifi
         await Notification.deleteOne(data)
     } catch (e) {
         console.log(e)
-    }
-
+    }   
+       if(userTo == userFrom) return
     return Notification.create(data)
 }
 const Notification = mongoose.model('Notification', notificationSchema)

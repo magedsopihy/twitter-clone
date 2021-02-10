@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
 
 function insertMessageNotifications(chat, message) {
     chat.users.forEach(userId => {
-        if (userId == message.sender._id.toString()) return
+        if (userId == message.sender._id) return
 
         Notification.insertNotifications(userId, message.sender._id, "new message", message.chat._id)
     });

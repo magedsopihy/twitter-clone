@@ -37,16 +37,19 @@ $('#submitReplyButton , #submitPostButton').click((event) => {
     }
     //making post request using jquery
     $.post("/api/posts", data, postData => {
-          
+
         if (postData.replyTo) {
+
             emitNotification(postData.replyTo.postedBy)
+
             location.reload()
+
 
         }
 
-        const html = htmlPost(postData)
-        $('.postContainer').prepend(html)
-        //outputPosts(postData,$(".postContainer"))
+        // const html = htmlPost(postData)
+        // $('.postContainer').prepend(html)
+        outputPosts(postData, $(".postContainer"))
         textarea.value = ""
         button.disabled = true
 
@@ -813,7 +816,7 @@ function showNotificationPopUp(notificationData) {
 }
 
 function showMessagePopUp(data) {
-    if (!data.chat.latestMessage._id) {
+    if (data.chat.latestMessage !== undefined &&!data.chat.latestMessage._id) {
         data.chat.latestMessage = data
     }
 
