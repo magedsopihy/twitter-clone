@@ -47,9 +47,10 @@ $('#submitReplyButton , #submitPostButton').click((event) => {
 
         }
 
-        // const html = htmlPost(postData)
-        // $('.postContainer').prepend(html)
-        outputPosts(postData, $(".postContainer"))
+        const html = htmlPost(postData)
+        $('.noResults').html('')
+        $('.postContainer').prepend(html)
+        //outputPosts(postData, $(".postContainer"))
         textarea.value = ""
         button.disabled = true
 

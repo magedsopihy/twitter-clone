@@ -33,15 +33,15 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
 }))
-app.use('/uploads', uploadRoute)
+app.use('/uploads',middleware.requireLogin, uploadRoute)
 //Routes
 app.use('/login', loginRoute)
 app.use('/register', registerRoute)
 app.use('/logout', logoutRoute)
 
-app.use('/api/posts', postsAPIRoute)
+app.use('/api/posts', middleware.requireLogin ,postsAPIRoute)
 app.use('/posts', middleware.requireLogin, postRoute)
-app.use('/uploads', uploadRoute)
+
 app.use('/profile', middleware.requireLogin, profileRoute)
 app.use('/search', middleware.requireLogin, searchRoute)
 
